@@ -17,7 +17,7 @@ public class JanelaPrincipal extends JFrame {
 	public JanelaPrincipal() {
 		String nomeAplicacao = "Server App";
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(900, 100, 945, 600);
 		setTitle(nomeAplicacao);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
