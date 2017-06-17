@@ -6,10 +6,17 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import model.BarraProgresso;
+import model.Cronometro;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.GridLayout;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+
 import java.awt.Component;
 import javax.swing.Box;
 import java.awt.Font;
@@ -19,10 +26,21 @@ import java.awt.FlowLayout;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import java.awt.SystemColor;
+import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.awt.event.ActionEvent;
 
 public class JanelaPrincipal extends JFrame {
 
 	private JPanel painelCentral;
+	
+	private BarraProgresso barraProgresso;
+	private JProgressBar progressBar;
+	private JButton btnEnviarArquivos;
+	private Cronometro cronometro;
+	private JLabel lblCronometro;
 
 	/**
 	 * Create the frame.
@@ -42,6 +60,11 @@ public class JanelaPrincipal extends JFrame {
 		menuBar.add(mnMenu);
 		
 		JMenuItem mntmSair = new JMenuItem("Sair");
+		mntmSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+		});
 		mnMenu.add(mntmSair);
 		painelCentral = new JPanel();
 		painelCentral.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -54,7 +77,7 @@ public class JanelaPrincipal extends JFrame {
 		painelTopo.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JLabel title = new JLabel("Bem vindo ao Dropbox Like");
-		title.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		title.setFont(new Font("Tahoma", Font.BOLD, 16));
 		title.setHorizontalAlignment(SwingConstants.CENTER);
 		painelTopo.add(title);
 		
@@ -65,6 +88,33 @@ public class JanelaPrincipal extends JFrame {
 		panelInterno.add(lblSelecioneSuasImagens);
 		
 		JButton btnSelecionarArquivos = new JButton("Selecionar Arquivos");
+		btnSelecionarArquivos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String imagens[];
+				JFileChooser chooser = new JFileChooser();  //Cria uma instância do JFileChooser
+				// TODO Referência: http://javafree.uol.com.br/artigo/877686/Visualizador-de-Imagens-com-JavaSwing+exemplo-JFileChooser.html
+				chooser.setMultiSelectionEnabled(true); //Seleciona múltiplos arquivos: true
+			    FileNameExtensionFilter filter = new FileNameExtensionFilter(
+			        "JPG & GIF Images", "jpg", "gif");  //Cria um filtro
+			    chooser.setFileFilter(filter);  //Altera o filtro do JFileChooser
+			    int returnVal = chooser.showOpenDialog(getParent()); //Abre o diálogo JFileChooser
+			    if(returnVal == JFileChooser.APPROVE_OPTION) {  //Verifica se o usuário clicou no botão OK
+			    	File selFile[] = chooser.getSelectedFiles();
+			    	imagens = new String[selFile.length];  
+			    	  
+			        for (int i = 0; i < selFile.length; i++) {  
+			           imagens[i] = selFile[i].getName();
+			           // Para pegar o caminho absoluto
+			           // absoluto[i] = selFile[i].getAbsolutePath();
+			           System.out.println("Você selecionou este arquivo: " +imagens[i]); // Apresenta uma mensagem informando o nome dos arquivos selecionados
+			        }  
+			         
+//			    	System.out.println("Você selecionou este arquivo: " +
+//			            chooser.getSelectedFile().getName());  //Apresenta uma mensagem informando o nome do arquivo/diretório selecionado
+			        
+			    }
+			}
+		});
 		panelInterno.add(btnSelecionarArquivos);
 		
 		JPanel painelCentro = new JPanel();
@@ -102,21 +152,32 @@ public class JanelaPrincipal extends JFrame {
 		painelCentral.add(panelBaixo, BorderLayout.SOUTH);
 		panelBaixo.setLayout(new GridLayout(3, 2, 10, 10));
 		
-		JProgressBar progressBar = new JProgressBar();
+		progressBar = new JProgressBar();
+		progressBar.setBackground(new Color(153, 255, 153));
+		progressBar.setStringPainted(true);
+		progressBar.setForeground(new Color(51, 204, 0));
 		panelBaixo.add(progressBar);
 		
-		JButton btnEnviarArquivos = new JButton("Enviar Arquivos");
+		btnEnviarArquivos = new JButton("Enviar Arquivos");
+		btnEnviarArquivos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				cronometro = new Cronometro(lblCronometro);
+				cronometro.start();
+				barraProgresso = new BarraProgresso(progressBar, btnEnviarArquivos, cronometro);
+				barraProgresso.start();
+			
+			}
+		});
 		panelBaixo.add(btnEnviarArquivos);
 		
-		JLabel lblCronometro = new JLabel("Cronometro");
+		lblCronometro = new JLabel("00:00:00");
 		lblCronometro.setHorizontalAlignment(SwingConstants.CENTER);
 		panelBaixo.add(lblCronometro);
 		
 		JButton btnRemoverArquivos = new JButton("Remover Arquivos");
 		panelBaixo.add(btnRemoverArquivos);
-		
-		
-		
 	}
+	
+
 
 }
