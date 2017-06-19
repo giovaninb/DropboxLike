@@ -84,8 +84,22 @@ public class JanelaPrincipal extends JFrame {
 		});
 		mnMenu.add(mntmConecta);
 		
+		JMenuItem mntmSobre = new JMenuItem("Sobre");
+		mntmSobre.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Abrir alguma coisa sobre o Sobre");
+			}
+		});
+		mnMenu.add(mntmSobre);
+		
 		JMenuItem mntmSair = new JMenuItem("Sair");
+		mntmSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+		});
 		mnMenu.add(mntmSair);
+		
 	}
 
 }
