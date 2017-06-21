@@ -70,7 +70,7 @@ public class JanelaPrincipal extends JFrame {
 		String nomeAplicacao = "Client App";
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 600, 400);
+		setBounds(100, 100, 600, 550);
 		setTitle(nomeAplicacao);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -179,6 +179,11 @@ public class JanelaPrincipal extends JFrame {
 		JPanel panelBarraCronometro = new JPanel();
 		panelBaixo.add(panelBarraCronometro);
 		panelBarraCronometro.setLayout(new BoxLayout(panelBarraCronometro, BoxLayout.X_AXIS));
+		
+		JLabel labelEspaco = new JLabel("");
+		labelEspaco.setHorizontalAlignment(SwingConstants.CENTER);
+		labelEspaco.setBorder(new EmptyBorder(10, 10,10, 10));
+		panelBarraCronometro.add(labelEspaco);
 		
 		progressBar = new JProgressBar();
 		panelBarraCronometro.add(progressBar);

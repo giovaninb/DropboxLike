@@ -69,7 +69,7 @@ public class ControleJanelaPrincipal implements ActionListener, KeyListener {
 		    FileNameExtensionFilter filter = new FileNameExtensionFilter(
 		    		"PNG & JPEG Images", "png", "jpeg");  //Cria um filtro
 		    chooser.setFileFilter(filter);  //Altera o filtro do JFileChooser
-		    int returnVal = chooser.showOpenDialog(jan.getParent()); //Abre o diálogo JFileChooser
+		    int returnVal = chooser.showOpenDialog(jan); //Abre o diálogo JFileChooser
 		    if(returnVal == JFileChooser.APPROVE_OPTION) {  //Verifica se o usuário clicou no botão OK
 		    	File selFile[] = chooser.getSelectedFiles();
 		    	imagens = new String[selFile.length];  
@@ -108,7 +108,7 @@ public class ControleJanelaPrincipal implements ActionListener, KeyListener {
 		    FileNameExtensionFilter filter = new FileNameExtensionFilter(
 		        "PNG & JPEG Images", "png", "jpeg");  //Cria um filtro
 		    chooser.setFileFilter(filter);  //Altera o filtro do JFileChooser
-		    int returnVal = chooser.showOpenDialog(jan.getParent()); //Abre o diálogo JFileChooser
+		    int returnVal = chooser.showOpenDialog(jan); //Abre o diálogo JFileChooser
 		    if(returnVal == JFileChooser.APPROVE_OPTION) {  //Verifica se o usuário clicou no botão OK
 		    	File selFile[] = chooser.getSelectedFiles();
 		    	imagens = new String[selFile.length];  
@@ -118,12 +118,12 @@ public class ControleJanelaPrincipal implements ActionListener, KeyListener {
 		           // Método para setar texto no JTextArea
 		           //listSelecionadas.append((i+1)+") "+imagens[i]+"\n");
 		           // TODO Referência: http://www.java2s.com/Code/Java/Swing-JFC/AnexampleofJListwithaDefaultListModel.htm
-		           jan.getModel2().insertElementAt((i+1)+") "+imagens[i]+"\n", jan.getModel2().getSize());
+		           jan.getModel2().insertElementAt((jan.getModel2().getSize()+1)+") "+imagens[i]+"\n", jan.getModel2().getSize());
 		           // Para pegar o caminho absoluto
 		           // absoluto[i] = selFile[i].getAbsolutePath();
 		           System.out.println("Você selecionou este arquivo: " +imagens[i]); // Apresenta uma mensagem informando o nome dos arquivos selecionados
 		        }
-		        jan.getTextFieldSended().setText(String.valueOf(selFile.length));
+		        jan.getTextFieldSended().setText(String.valueOf(jan.getModel2().getSize()));
 		    }
 		}
 		if (e.getActionCommand().equalsIgnoreCase("Remover Arquivos")) {

@@ -6,6 +6,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JTextField;
 
+import view.JanelaPrincipal;
+
 public class TransfereImagens extends Thread {
 	
 	private DefaultListModel modeloOrigem;
@@ -22,7 +24,9 @@ public class TransfereImagens extends Thread {
 		this.listaDeImagensDestino = listaDeImagensDestino;
 	}
 	
-	public void transfereImagens() {
+	public boolean transfereImagens() {
+		boolean resultado = false;
+		
 		modeloOrigem = new DefaultListModel<>();
 		modeloDestino = new DefaultListModel<>();
 		listaDeImagensOrigem = new JList<Imagem>(modeloOrigem);
@@ -30,6 +34,11 @@ public class TransfereImagens extends Thread {
 		
 		JTextField contadorOrigem = new JTextField();
 		JTextField contadorDestino = new JTextField();
+		
+		
+		
+		
+		return resultado;
 	}
 	
 	@Override

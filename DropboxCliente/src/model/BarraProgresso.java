@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import javax.swing.Timer;
 import javax.swing.plaf.ProgressBarUI;
@@ -32,7 +33,8 @@ public class BarraProgresso extends Thread {
                    porcentagem++;
                    progressBar.setValue(porcentagem);
                    if (porcentagem >= 100) {
-                       tempo.stop();
+                	   //verifica se o envio foi realizado com sucesso ou não
+                	   tempo.stop();
                        cron.stopTime();
                        btnIniciar.setEnabled(true);
                    }
