@@ -49,6 +49,8 @@ public class JanelaPrincipal extends JFrame {
 	private Cronometro cronometro;
 	private JLabel lblCronometro;
 	
+	private JScrollPane scroll;
+	private JScrollPane scroll2;
 	private DefaultListModel model;
 	private DefaultListModel model2;
 	private JList listSelecionadas;
@@ -157,7 +159,9 @@ public class JanelaPrincipal extends JFrame {
 		
 		model = new DefaultListModel();
 		listSelecionadas = new JList(model);
-		panelSelectedImages.add(listSelecionadas, BorderLayout.CENTER);
+		scroll = new JScrollPane (listSelecionadas, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scroll.setBorder(new EmptyBorder(10, 10, 10, 10));
+		panelSelectedImages.add(scroll, BorderLayout.CENTER);
 		
 		JPanel panelSendImages = new JPanel();
 		painelCentro.add(panelSendImages);
@@ -169,7 +173,9 @@ public class JanelaPrincipal extends JFrame {
 		
 		model2 = new DefaultListModel();
 		listEnviados = new JList(model2);
-		panelSendImages.add(listEnviados, BorderLayout.CENTER);
+		scroll2 = new JScrollPane (listEnviados, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scroll2.setBorder(new EmptyBorder(10, 10, 10, 10));
+		panelSendImages.add(scroll2, BorderLayout.CENTER);
 		
 		JPanel panelBaixo = new JPanel();
 		painelCentral.add(panelBaixo, BorderLayout.SOUTH);
