@@ -38,16 +38,13 @@ import java.awt.event.ActionEvent;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.BoxLayout;
+import javax.swing.JTextPane;
+import javax.swing.JTextField;
 
 public class JanelaPrincipal extends JFrame {
 
 	private JPanel painelCentral;
 	
-	private BarraProgresso barraProgresso;
-	private JProgressBar progressBar;
-	private JButton btnEnviarArquivos;
-	private Cronometro cronometro;
-	private JLabel lblCronometro;
 	
 	private JScrollPane scroll;
 	private JScrollPane scroll2;
@@ -55,6 +52,14 @@ public class JanelaPrincipal extends JFrame {
 	private DefaultListModel model2;
 	private JList listSelecionadas;
 	private JList listEnviados;
+	private JTextField textFieldSelected;
+	private JTextField textFieldSended;
+	
+	private BarraProgresso barraProgresso;
+	private JProgressBar progressBar;
+	private JButton btnEnviarArquivos;
+	private Cronometro cronometro;
+	private JLabel lblCronometro;
 
 	/**
 	 * Create the frame.
@@ -124,7 +129,7 @@ public class JanelaPrincipal extends JFrame {
 			    if(returnVal == JFileChooser.APPROVE_OPTION) {  //Verifica se o usuário clicou no botão OK
 			    	File selFile[] = chooser.getSelectedFiles();
 			    	imagens = new String[selFile.length];  
-			    	  
+			    	
 			        for (int i = 0; i < selFile.length; i++) {  
 			           imagens[i] = selFile[i].getName();
 			           // Método para setar texto no JTextArea
@@ -135,6 +140,7 @@ public class JanelaPrincipal extends JFrame {
 			           // absoluto[i] = selFile[i].getAbsolutePath();
 			           System.out.println("Você selecionou este arquivo: " +imagens[i]); // Apresenta uma mensagem informando o nome dos arquivos selecionados
 			        }  
+			        textFieldSelected.setText(String.valueOf(selFile.length)); 
 			         
 //			    	System.out.println("Você selecionou este arquivo: " +
 //			            chooser.getSelectedFile().getName());  //Apresenta uma mensagem informando o nome do arquivo/diretório selecionado
@@ -153,9 +159,19 @@ public class JanelaPrincipal extends JFrame {
 		painelCentro.add(panelSelectedImages);
 		panelSelectedImages.setLayout(new BorderLayout(5, 5));
 		
-		JLabel lblTitleSelectedImages = new JLabel("Imagens Selecionadas");
+		JPanel panelContSelected = new JPanel();
+		panelSelectedImages.add(panelContSelected, BorderLayout.NORTH);
+		panelContSelected.setLayout(new GridLayout(1, 2, 5, 5));
+		
+		JLabel lblTitleSelectedImages = new JLabel("Imagens Selecionadas:");
+		panelContSelected.add(lblTitleSelectedImages);
 		lblTitleSelectedImages.setHorizontalAlignment(SwingConstants.CENTER);
-		panelSelectedImages.add(lblTitleSelectedImages, BorderLayout.NORTH);
+		
+		textFieldSelected = new JTextField();
+		textFieldSelected.setEditable(false);
+		textFieldSelected.setHorizontalAlignment(SwingConstants.CENTER);
+		textFieldSelected.setColumns(5);
+		panelContSelected.add(textFieldSelected);
 		
 		model = new DefaultListModel();
 		listSelecionadas = new JList(model);
@@ -167,9 +183,19 @@ public class JanelaPrincipal extends JFrame {
 		painelCentro.add(panelSendImages);
 		panelSendImages.setLayout(new BorderLayout(5, 5));
 		
+		JPanel panelContSend = new JPanel();
+		panelSendImages.add(panelContSend, BorderLayout.NORTH);
+		panelContSend.setLayout(new GridLayout(1, 2, 5, 5));
+		
 		JLabel lblTitleSendImages = new JLabel("Imagens Enviadas");
+		panelContSend.add(lblTitleSendImages);
 		lblTitleSendImages.setHorizontalAlignment(SwingConstants.CENTER);
-		panelSendImages.add(lblTitleSendImages, BorderLayout.NORTH);
+		
+		textFieldSended = new JTextField();
+		textFieldSended.setEditable(false);
+		textFieldSended.setHorizontalAlignment(SwingConstants.CENTER);
+		textFieldSended.setColumns(5);		
+		panelContSend.add(textFieldSended);
 		
 		model2 = new DefaultListModel();
 		listEnviados = new JList(model2);
@@ -207,6 +233,12 @@ public class JanelaPrincipal extends JFrame {
 				cronometro.start();
 				barraProgresso = new BarraProgresso(progressBar, btnEnviarArquivos, cronometro);
 				barraProgresso.start();
+				// consumir elementos da lista 1, e produzir elementos na lista 2
+				
+				// setar texto nos campos de contagem
+		        textFieldSelected.setText(String.valueOf(model.getSize())); 
+		        
+
 			
 			}
 		});
@@ -237,7 +269,8 @@ public class JanelaPrincipal extends JFrame {
 			           // Para pegar o caminho absoluto
 			           // absoluto[i] = selFile[i].getAbsolutePath();
 			           System.out.println("Você selecionou este arquivo: " +imagens[i]); // Apresenta uma mensagem informando o nome dos arquivos selecionados
-			        }  
+			        }
+			        textFieldSended.setText(String.valueOf(selFile.length));
 			         
 //			    	System.out.println("Você selecionou este arquivo: " +
 //			            chooser.getSelectedFile().getName());  //Apresenta uma mensagem informando o nome do arquivo/diretório selecionado
@@ -253,6 +286,7 @@ public class JanelaPrincipal extends JFrame {
 				try {
 					if (model2.getSize() > 0)
 				          model2.removeElementAt(0);
+					 	  textFieldSended.setText(String.valueOf(model2.getSize()));
 						  System.out.println("Você removeu esta imagem: "+model2.get(0));	
 				} catch (ArrayIndexOutOfBoundsException e) {
 					if (model2.isEmpty()) {
