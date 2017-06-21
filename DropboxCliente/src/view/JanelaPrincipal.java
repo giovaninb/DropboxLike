@@ -34,6 +34,8 @@ import java.awt.SystemColor;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
@@ -44,8 +46,7 @@ import javax.swing.JTextField;
 public class JanelaPrincipal extends JFrame {
 
 	private JPanel painelCentral;
-	
-	
+	private JButton btnSelecionarArquivos;	
 	private JScrollPane scroll;
 	private JScrollPane scroll2;
 	private DefaultListModel model;
@@ -55,11 +56,11 @@ public class JanelaPrincipal extends JFrame {
 	private JTextField textFieldSelected;
 	private JTextField textFieldSended;
 	
-	private BarraProgresso barraProgresso;
 	private JProgressBar progressBar;
 	private JButton btnEnviarArquivos;
-	private Cronometro cronometro;
 	private JLabel lblCronometro;
+	private JButton btnAdicionarArquivos;
+	private JButton btnRemoverArquivos;
 
 	/**
 	 * Create the frame.
@@ -115,39 +116,7 @@ public class JanelaPrincipal extends JFrame {
 		JLabel lblSelecioneSuasImagens = new JLabel("Selecione suas Imagens: ");
 		panelInterno.add(lblSelecioneSuasImagens);
 		
-		JButton btnSelecionarArquivos = new JButton("Selecionar Arquivos");
-		btnSelecionarArquivos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String imagens[];
-				JFileChooser chooser = new JFileChooser();  //Cria uma instância do JFileChooser
-				// TODO Referência: http://javafree.uol.com.br/artigo/877686/Visualizador-de-Imagens-com-JavaSwing+exemplo-JFileChooser.html
-				chooser.setMultiSelectionEnabled(true); //Seleciona múltiplos arquivos: true
-			    FileNameExtensionFilter filter = new FileNameExtensionFilter(
-			    		"PNG & JPEG Images", "png", "jpeg");  //Cria um filtro
-			    chooser.setFileFilter(filter);  //Altera o filtro do JFileChooser
-			    int returnVal = chooser.showOpenDialog(getParent()); //Abre o diálogo JFileChooser
-			    if(returnVal == JFileChooser.APPROVE_OPTION) {  //Verifica se o usuário clicou no botão OK
-			    	File selFile[] = chooser.getSelectedFiles();
-			    	imagens = new String[selFile.length];  
-			    	
-			        for (int i = 0; i < selFile.length; i++) {  
-			           imagens[i] = selFile[i].getName();
-			           // Método para setar texto no JTextArea
-			           //listSelecionadas.append((i+1)+") "+imagens[i]+"\n");
-			           // TODO Referência: http://www.java2s.com/Code/Java/Swing-JFC/AnexampleofJListwithaDefaultListModel.htm
-			           model.addElement((i+1)+") "+imagens[i]+"\n");
-			           // Para pegar o caminho absoluto
-			           // absoluto[i] = selFile[i].getAbsolutePath();
-			           System.out.println("Você selecionou este arquivo: " +imagens[i]); // Apresenta uma mensagem informando o nome dos arquivos selecionados
-			        }  
-			        textFieldSelected.setText(String.valueOf(selFile.length)); 
-			         
-//			    	System.out.println("Você selecionou este arquivo: " +
-//			            chooser.getSelectedFile().getName());  //Apresenta uma mensagem informando o nome do arquivo/diretório selecionado
-			        
-			    }
-			}
-		});
+		btnSelecionarArquivos = new JButton("Selecionar Arquivos");
 		panelInterno.add(btnSelecionarArquivos);
 		
 		JPanel painelCentro = new JPanel();
@@ -217,7 +186,7 @@ public class JanelaPrincipal extends JFrame {
 		progressBar.setStringPainted(true);
 		progressBar.setForeground(new Color(51, 204, 0));
 		
-		lblCronometro = new JLabel("00:00:00");
+		lblCronometro = new JLabel("00:00");
 		lblCronometro.setBorder(new EmptyBorder(10, 10,10, 10));
 		panelBarraCronometro.add(lblCronometro);
 		lblCronometro.setHorizontalAlignment(SwingConstants.CENTER);
@@ -227,78 +196,154 @@ public class JanelaPrincipal extends JFrame {
 		
 		btnEnviarArquivos = new JButton("Enviar Arquivos");
 		panelAddRemArq.add(btnEnviarArquivos);
-		btnEnviarArquivos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				cronometro = new Cronometro(lblCronometro);
-				cronometro.start();
-				barraProgresso = new BarraProgresso(progressBar, btnEnviarArquivos, cronometro);
-				barraProgresso.start();
-				// consumir elementos da lista 1, e produzir elementos na lista 2
-				
-				// setar texto nos campos de contagem
-		        textFieldSelected.setText(String.valueOf(model.getSize())); 
-		        
-
-			
-			}
-		});
+//		btnEnviarArquivos.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent arg0) {
+//				cronometro = new Cronometro(lblCronometro);
+//				cronometro.start();
+//				barraProgresso = new BarraProgresso(progressBar, btnEnviarArquivos, cronometro);
+//				barraProgresso.start();
+//				// consumir elementos da lista 1, e produzir elementos na lista 2
+//				
+//				// setar texto nos campos de contagem
+//		        textFieldSelected.setText(String.valueOf(model.getSize())); 
+//		        
+//
+//			
+//			}
+//		});
 		
 		// TODO Deixar desativado até Enviar para o Servidor
 		// TODO setEnable(false) no SelecionarArquivos depois de enviado
-		JButton btnAdicionarArquivos = new JButton("Adicionar Arquivos");
-		btnAdicionarArquivos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String imagens[];
-				JFileChooser chooser = new JFileChooser();  //Cria uma instância do JFileChooser
-				// TODO Referência: http://javafree.uol.com.br/artigo/877686/Visualizador-de-Imagens-com-JavaSwing+exemplo-JFileChooser.html
-				chooser.setMultiSelectionEnabled(true); //Seleciona múltiplos arquivos: true
-			    FileNameExtensionFilter filter = new FileNameExtensionFilter(
-			        "PNG & JPEG Images", "png", "jpeg");  //Cria um filtro
-			    chooser.setFileFilter(filter);  //Altera o filtro do JFileChooser
-			    int returnVal = chooser.showOpenDialog(getParent()); //Abre o diálogo JFileChooser
-			    if(returnVal == JFileChooser.APPROVE_OPTION) {  //Verifica se o usuário clicou no botão OK
-			    	File selFile[] = chooser.getSelectedFiles();
-			    	imagens = new String[selFile.length];  
-			    	  
-			        for (int i = 0; i < selFile.length; i++) {  
-			           imagens[i] = selFile[i].getName();
-			           // Método para setar texto no JTextArea
-			           //listSelecionadas.append((i+1)+") "+imagens[i]+"\n");
-			           // TODO Referência: http://www.java2s.com/Code/Java/Swing-JFC/AnexampleofJListwithaDefaultListModel.htm
-			           model2.insertElementAt((i+1)+") "+imagens[i]+"\n", model2.getSize());
-			           // Para pegar o caminho absoluto
-			           // absoluto[i] = selFile[i].getAbsolutePath();
-			           System.out.println("Você selecionou este arquivo: " +imagens[i]); // Apresenta uma mensagem informando o nome dos arquivos selecionados
-			        }
-			        textFieldSended.setText(String.valueOf(selFile.length));
-			         
-//			    	System.out.println("Você selecionou este arquivo: " +
-//			            chooser.getSelectedFile().getName());  //Apresenta uma mensagem informando o nome do arquivo/diretório selecionado
-			        
-			    }
-			}
-		});
+		btnAdicionarArquivos = new JButton("Adicionar Arquivos");
 		panelAddRemArq.add(btnAdicionarArquivos);
 		
-		JButton btnRemoverArquivos = new JButton("Remover Arquivos");
-		btnRemoverArquivos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					if (model2.getSize() > 0)
-				          model2.removeElementAt(0);
-					 	  textFieldSended.setText(String.valueOf(model2.getSize()));
-						  System.out.println("Você removeu esta imagem: "+model2.get(0));	
-				} catch (ArrayIndexOutOfBoundsException e) {
-					if (model2.isEmpty()) {
-						System.out.println("Lista Vazia! Não há o que remover.");
-					}
-				}
-			}
-		});
+		btnRemoverArquivos = new JButton("Remover Arquivos");
 		panelAddRemArq.add(btnRemoverArquivos);
+	}
+
+	
+	
+	public JPanel getPainelCentral() {
+		return painelCentral;
+	}
+
+	public void setPainelCentral(JPanel painelCentral) {
+		this.painelCentral = painelCentral;
+	}
+
+	public JButton getBtnSelecionarArquivos() {
+		return btnSelecionarArquivos;
+	}
+
+	public void setBtnSelecionarArquivos(JButton btnSelecionarArquivos) {
+		this.btnSelecionarArquivos = btnSelecionarArquivos;
+	}
+
+	public JScrollPane getScroll() {
+		return scroll;
+	}
+
+	public void setScroll(JScrollPane scroll) {
+		this.scroll = scroll;
+	}
+
+	public JScrollPane getScroll2() {
+		return scroll2;
+	}
+
+	public void setScroll2(JScrollPane scroll2) {
+		this.scroll2 = scroll2;
+	}
+
+	public DefaultListModel getModel() {
+		return model;
+	}
+
+	public void setModel(DefaultListModel model) {
+		this.model = model;
+	}
+
+	public DefaultListModel getModel2() {
+		return model2;
+	}
+
+	public void setModel2(DefaultListModel model2) {
+		this.model2 = model2;
+	}
+
+	public JList getListSelecionadas() {
+		return listSelecionadas;
+	}
+
+	public void setListSelecionadas(JList listSelecionadas) {
+		this.listSelecionadas = listSelecionadas;
+	}
+
+	public JList getListEnviados() {
+		return listEnviados;
+	}
+
+	public void setListEnviados(JList listEnviados) {
+		this.listEnviados = listEnviados;
+	}
+
+	public JTextField getTextFieldSelected() {
+		return textFieldSelected;
+	}
+
+	public void setTextFieldSelected(JTextField textFieldSelected) {
+		this.textFieldSelected = textFieldSelected;
+	}
+
+	public JTextField getTextFieldSended() {
+		return textFieldSended;
+	}
+
+	public void setTextFieldSended(JTextField textFieldSended) {
+		this.textFieldSended = textFieldSended;
+	}
+	
+	public JProgressBar getProgressBar() {
+		return progressBar;
+	}
+
+	public void setProgressBar(JProgressBar progressBar) {
+		this.progressBar = progressBar;
+	}
+
+	public JButton getBtnEnviarArquivos() {
+		return btnEnviarArquivos;
+	}
+
+	public void setBtnEnviarArquivos(JButton btnEnviarArquivos) {
+		this.btnEnviarArquivos = btnEnviarArquivos;
+	}
+
+	public JLabel getLblCronometro() {
+		return lblCronometro;
+	}
+
+	public void setLblCronometro(JLabel lblCronometro) {
+		this.lblCronometro = lblCronometro;
+	}
+
+	public JButton getBtnAdicionarArquivos() {
+		return btnAdicionarArquivos;
+	}
+
+	public void setBtnAdicionarArquivos(JButton btnAdicionarArquivos) {
+		this.btnAdicionarArquivos = btnAdicionarArquivos;
+	}
+
+	public JButton getBtnRemoverArquivos() {
+		return btnRemoverArquivos;
+	}
+
+	public void setBtnRemoverArquivos(JButton btnRemoverArquivos) {
+		this.btnRemoverArquivos = btnRemoverArquivos;
 	}
 	
 	
-
+	
 
 }

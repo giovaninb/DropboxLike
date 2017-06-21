@@ -1,6 +1,8 @@
 package control;
 
 import java.awt.EventQueue;
+
+import model.Cronometro;
 import view.JanelaPrincipal;
 
 public class ClientApp {
@@ -14,6 +16,7 @@ public class ClientApp {
 				public void run() {
 					try {
 						JanelaPrincipal frame = new JanelaPrincipal();
+						ControleJanelaPrincipal controle = new ControleJanelaPrincipal(frame);
 						frame.setVisible(true);
 					} catch (Exception e) {
 						e.printStackTrace();

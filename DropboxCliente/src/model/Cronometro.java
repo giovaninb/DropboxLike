@@ -33,12 +33,11 @@ public class Cronometro extends Thread {
                     currentHora++;
                     currentMinuto = 0;
                 }
-                
-                String hr = currentHora <= 9? "0"+currentHora:currentHora+"";
+          
                 String min = currentMinuto <= 9? "0"+currentMinuto:currentMinuto+"";
                 String seg = currentSegundo <= 9? "0"+currentSegundo:currentSegundo+"";
                 
-                label.setText(hr+":"+min+":"+seg);  
+                label.setText(min+":"+seg);  
             }  
         };  
         this.timer = new Timer(velocidade, action);  
@@ -50,10 +49,9 @@ public class Cronometro extends Thread {
         
 	}
 	public void cleanTime() {
-		currentHora = 0;
         currentMinuto = 0;
         currentSegundo = 0;
-        label.setText("00:00:00");
+        label.setText("00:00");
 	}
 
     @Override
