@@ -110,15 +110,6 @@ public class JanelaPrincipal extends JFrame {
 		title.setHorizontalAlignment(SwingConstants.CENTER);
 		painelTopo.add(title);
 		
-		JPanel panelInterno = new JPanel();
-		painelTopo.add(panelInterno);
-		
-		JLabel lblSelecioneSuasImagens = new JLabel("Selecione suas Imagens: ");
-		panelInterno.add(lblSelecioneSuasImagens);
-		
-		btnSelecionarArquivos = new JButton("Selecionar Arquivos");
-		panelInterno.add(btnSelecionarArquivos);
-		
 		JPanel panelConecta = new JPanel();
 		painelTopo.add(panelConecta);
 		
@@ -131,6 +122,15 @@ public class JanelaPrincipal extends JFrame {
 		
 		btnConectar = new JButton("Conectar");
 		panelConecta.add(btnConectar);
+		
+		JPanel panelInterno = new JPanel();
+		painelTopo.add(panelInterno);
+		
+		JLabel lblSelecioneSuasImagens = new JLabel("Selecione suas Imagens: ");
+		panelInterno.add(lblSelecioneSuasImagens);
+		
+		btnSelecionarArquivos = new JButton("Selecionar Arquivos");
+		panelInterno.add(btnSelecionarArquivos);
 		
 		JPanel painelCentro = new JPanel();
 		painelCentro.setBorder(new EmptyBorder(10, 10, 10, 10));

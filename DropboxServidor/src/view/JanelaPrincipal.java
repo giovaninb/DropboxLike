@@ -21,6 +21,7 @@ import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.GridLayout;
+import java.awt.LayoutManager;
 
 public class JanelaPrincipal extends JFrame {
 
@@ -60,25 +61,11 @@ public class JanelaPrincipal extends JFrame {
 				cont = cont +50;
 				contentPane.add(interna);
 				
-				JTabbedPane tabbed = new JTabbedPane();
+				// COLOCAR A INTERNAL FRAME AQUI
+				JPanel painelPrincipal = new JPanel();
 
-				JPanel p1 = new JPanel();
-				JLabel l1 = new JLabel("Painel 1");
-				p1.add(l1);
-				tabbed.add("tab1", p1);
-
-				JPanel p2 = new JPanel();
-				JLabel l2 = new JLabel("Painel 2");
-				p2.add(l2);
-				tabbed.add("tab2", p2);
-
-				JPanel p3 = new JPanel();
-				JLabel l3 = new JLabel("Painel 3");
-				p3.add(l3);
-				tabbed.add("tab3", p3);
-
-				interna.getContentPane().add(tabbed);
-				tabbed.setVisible(true);
+				interna.getContentPane().add(painelPrincipal);
+				painelPrincipal.setVisible(true);
 				validate();
 			}
 		});

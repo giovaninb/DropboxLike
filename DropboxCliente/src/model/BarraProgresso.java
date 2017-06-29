@@ -36,7 +36,6 @@ public class BarraProgresso extends Thread {
                 	   //verifica se o envio foi realizado com sucesso ou não
                 	   tempo.stop();
                        cron.stopTime();
-                       btnIniciar.setEnabled(true);
                    }
                }
            });
