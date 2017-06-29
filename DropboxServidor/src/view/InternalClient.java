@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+import net.miginfocom.swing.MigLayout;
 
 public class InternalClient extends JInternalFrame {
 	private JTextField txtIP;
@@ -24,40 +25,33 @@ public class InternalClient extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public InternalClient() {
-		getContentPane().setLayout(null);
+		getContentPane().setLayout(new MigLayout("", "[38px][13px][153px][10px][31px][33px][86px]", "[24px][20px][334px]"));
 		
 		JLabel lblCliente = new JLabel("CLIENTE");
 		lblCliente.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCliente.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
-		lblCliente.setBounds(155, 11, 100, 24);
-		getContentPane().add(lblCliente);
+		getContentPane().add(lblCliente, "cell 2 0 4 1,growx,aligny top");
 		
 		txtIP = new JTextField();
 		txtIP.setEditable(false);
-		txtIP.setBounds(61, 42, 153, 20);
-		getContentPane().add(txtIP);
+		getContentPane().add(txtIP, "cell 1 1 2 1,growx,aligny top");
 		txtIP.setColumns(10);
 		
 		JLabel lblIp = new JLabel("IP:");
-		lblIp.setBounds(20, 45, 28, 14);
-		getContentPane().add(lblIp);
+		getContentPane().add(lblIp, "cell 0 1,growx,aligny center");
 		
 		JLabel lblQuantidade = new JLabel("Quantidade:");
-		lblQuantidade.setBounds(224, 45, 66, 14);
-		getContentPane().add(lblQuantidade);
+		getContentPane().add(lblQuantidade, "cell 4 1 2 1,alignx left,aligny center");
 		
 		txtQuantidade = new JTextField();
 		txtQuantidade.setEditable(false);
-		txtQuantidade.setBounds(288, 42, 56, 20);
-		getContentPane().add(txtQuantidade);
+		getContentPane().add(txtQuantidade, "cell 6 1,alignx left,aligny top");
 		txtQuantidade.setColumns(10);
 		
 		modelo = new DefaultListModel();
 		listaCliente = new JList();
 		scroll = new JScrollPane(listaCliente, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scroll.setSize(364, 334);
-		scroll.setLocation(10, 75);
-		getContentPane().add(scroll);
+		getContentPane().add(scroll, "cell 0 2 7 1,grow");
 
 	}
 }
