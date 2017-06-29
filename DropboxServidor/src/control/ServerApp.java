@@ -1,6 +1,8 @@
 package control;
 
 import java.awt.EventQueue;
+
+import model.Imagem;
 import view.JanelaPrincipal;
 
 public class ServerApp {
@@ -13,7 +15,9 @@ public class ServerApp {
 			public void run() {
 				try {
 					JanelaPrincipal frame = new JanelaPrincipal();
-					Server server = new Server();
+					Imagem img = new Imagem();
+					ControleImagens controle = new ControleImagens(img, frame);
+					controle.aguardarClientes();
 					
 					frame.setVisible(true);
 				} catch (Exception e) {

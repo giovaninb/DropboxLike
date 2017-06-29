@@ -1,22 +1,31 @@
 package control;
 
+import java.awt.Image;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintStream;
+import java.lang.reflect.Array;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import javax.swing.DefaultListModel;
+
+import model.Imagem;
 import view.InternalClient;
+import view.JanelaPrincipal;
 
 public class Server extends Thread {
 
 	private int contadorArquivosCliente;
 	private int contadorArquivosServidor;
 	private InternalClient internal;
+	private JanelaPrincipal jan;
+	private DefaultListModel<Imagem> listaImagens;
+	private int cont = 0;
 	
 	private ArrayList<PrintStream> clientes;
 	
@@ -55,13 +64,13 @@ public class Server extends Thread {
 				System.out.print("Aguardando conexao do cliente...");
 				System.out.println("Nova conexao com o cliente " + socket.getInetAddress().getHostAddress());
 				
-				// adiciona saida do cliente à lista
-			    PrintStream ps = new PrintStream(socket.getOutputStream());
-			    this.clientes.add(ps);
-			       
-			    // cria tratador de cliente numa nova thread
-			    TrataClients tc = new TrataClients(socket.getInputStream(), this, this.internal);
-			    new Thread(tc).start();
+				internal = new InternalClient();
+				internal.setVisible(true);
+				internal.setBounds(cont, cont, 400, 400);
+				cont = cont+50;
+				jan.getContentPane().add(internal);
+				jan.validate();
+				
 			       
 				return conectou;
 			} catch (IOException e) {
@@ -72,6 +81,30 @@ public class Server extends Thread {
     }
     
     public void recebeDados() {
+    	try {
+			objectInputStream = new ObjectInputStream(socket.getInputStream());
+			System.out.println("Lista recebida com sucesso!");
+			// Número de arquivos Cliente
+			dataInputStream = new DataInputStream(socket.getInputStream());
+			
+			listaImagens = new DefaultListModel<>();
+			for (int i = 0; i < listaImagens.size(); i++) {
+				String s;
+				try {
+					s = objectInputStream.readObject().toString();
+					Imagem img = new Imagem(listaImagens.indexOf(s), s);
+					listaImagens.addElement(img);
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}				
+			}
+			
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	
     }
 	
@@ -83,7 +116,6 @@ public class Server extends Thread {
 	
 	public int comparaDados(int num1, int num2){
         int diferenca = 0;
-
 		 try {
 			dataInputStream = new DataInputStream(socket.getInputStream());
 	        dataOutputStream = new DataOutputStream(socket.getOutputStream());
@@ -117,5 +149,15 @@ public class Server extends Thread {
 	public void run() {
 		comparaDados(contadorArquivosCliente, contadorArquivosServidor);
 	}
+
+	public DefaultListModel<Imagem> getListaImagens() {
+		return listaImagens;
+	}
+
+	public void setListaImagens(DefaultListModel<Imagem> listaImagens) {
+		this.listaImagens = listaImagens;
+	}
+	
+	
 
 }

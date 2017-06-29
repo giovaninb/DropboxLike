@@ -1,20 +1,26 @@
 package control;
 
 import model.Imagem;
+import view.JanelaPrincipal;
 
-public class ControleImagens {
+public class ControleImagens extends Thread {
 	
 	private Server servidor;
-	private ControleJanelaPrincipal janelaControle;
 	private Imagem imagem;
+	private JanelaPrincipal jan;
 	
-	public ControleImagens(Imagem img) {
+	public ControleImagens(Imagem img, JanelaPrincipal jan) {
 		this.imagem = img;
+		this.jan = jan;
+		servidor = new Server();
 	}
-
 	
-	public void enviarDados() {
-
+	public void aguardarClientes() {
+		servidor.aguardaClientes();
+	}
+	
+	public void receberDados() {
+		servidor.recebeDados();
 	}
 	
 	public void mostrarDadosEnviados() {
