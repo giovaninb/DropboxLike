@@ -55,18 +55,20 @@ public class JanelaPrincipal extends JFrame {
 		JMenuItem mntmConecta = new JMenuItem("Conecta Cliente");
 		mntmConecta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JInternalFrame interna = new JInternalFrame("InternalFrame", true, true, true);
-				interna.setVisible(true);
-				interna.setBounds(cont, cont, 400, 400);
-				cont = cont +50;
-				contentPane.add(interna);
 				
 				// COLOCAR A INTERNAL FRAME AQUI
-				JPanel painelPrincipal = new JPanel();
-
-				interna.getContentPane().add(painelPrincipal);
+				//VOU DEIXAR COMENTADO QUALQUER COISA
+				
+				/*JPanel painelPrincipal = new JPanel();
+				InternalClient ic = new InternalClient();
+				ic.setVisible(true);
+				ic.setBounds(cont, cont, 400, 400);
+				cont = cont+50;
+				contentPane.add(ic);
+				ic.getContentPane().add(painelPrincipal);
+			
 				painelPrincipal.setVisible(true);
-				validate();
+				validate();*/
 			}
 		});
 		mnMenu.add(mntmConecta);
