@@ -1,6 +1,7 @@
 package control;
 
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -16,7 +17,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import model.BarraProgresso;
 import model.Cronometro;
 import model.Imagem;
-import model.TransfereImagens;
 import view.JanelaPrincipal;
 
 public class ControleJanelaPrincipal implements ActionListener, KeyListener {
@@ -24,7 +24,6 @@ public class ControleJanelaPrincipal implements ActionListener, KeyListener {
 	private JanelaPrincipal jan;
 	private BarraProgresso barraProgresso;
 	private Cronometro cronometro;
-	private TransfereImagens transfere;
 
 	public ControleJanelaPrincipal(JanelaPrincipal jan) {
 		this.jan = jan;
@@ -123,14 +122,14 @@ public class ControleJanelaPrincipal implements ActionListener, KeyListener {
 		           // absoluto[i] = selFile[i].getAbsolutePath();
 		           System.out.println("Você selecionou este arquivo: " +imagens[i]); // Apresenta uma mensagem informando o nome dos arquivos selecionados
 		        }
-		        jan.getTextFieldSended().setText(String.valueOf(jan.getModel2().getSize()));
+		        jan.getTextFieldSelected().setText(String.valueOf(jan.getModel2().getSize()));
 		    }
 		}
 		if (e.getActionCommand().equalsIgnoreCase("Remover Arquivos")) {
 			try {
 				if (jan.getModel2().getSize() > 0)
 			          jan.getModel2().removeElementAt(0);
-				 	  jan.getTextFieldSended().setText(String.valueOf(jan.getModel2().getSize()));
+				 	  jan.getTextFieldSelected().setText(String.valueOf(jan.getModel2().getSize()));
 					  System.out.println("Você removeu esta imagem: "+jan.getModel2().get(0));	
 			} catch (ArrayIndexOutOfBoundsException arg) {
 				if (jan.getModel2().isEmpty()) {

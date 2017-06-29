@@ -48,19 +48,19 @@ public class JanelaPrincipal extends JFrame {
 	private JPanel painelCentral;
 	private JButton btnSelecionarArquivos;	
 	private JScrollPane scroll;
-	private JScrollPane scroll2;
 	private DefaultListModel model;
 	private DefaultListModel model2;
 	private JList listSelecionadas;
-	private JList listEnviados;
 	private JTextField textFieldSelected;
-	private JTextField textFieldSended;
 	
 	private JProgressBar progressBar;
 	private JButton btnEnviarArquivos;
 	private JLabel lblCronometro;
 	private JButton btnAdicionarArquivos;
 	private JButton btnRemoverArquivos;
+	
+	private JTextField txEndereco;
+	private JButton btnConectar;
 
 	/**
 	 * Create the frame.
@@ -70,7 +70,7 @@ public class JanelaPrincipal extends JFrame {
 		String nomeAplicacao = "Client App";
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 600, 550);
+		setBounds(100, 100, 450, 650);
 		setTitle(nomeAplicacao);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -119,6 +119,19 @@ public class JanelaPrincipal extends JFrame {
 		btnSelecionarArquivos = new JButton("Selecionar Arquivos");
 		panelInterno.add(btnSelecionarArquivos);
 		
+		JPanel panelConecta = new JPanel();
+		painelTopo.add(panelConecta);
+		
+		JLabel lblIp = new JLabel("IP :");
+		panelConecta.add(lblIp);
+		
+		txEndereco = new JTextField();
+		panelConecta.add(txEndereco);
+		txEndereco.setColumns(10);
+		
+		btnConectar = new JButton("Conectar");
+		panelConecta.add(btnConectar);
+		
 		JPanel painelCentro = new JPanel();
 		painelCentro.setBorder(new EmptyBorder(10, 10, 10, 10));
 		painelCentral.add(painelCentro, BorderLayout.CENTER);
@@ -148,36 +161,14 @@ public class JanelaPrincipal extends JFrame {
 		scroll.setBorder(new EmptyBorder(10, 10, 10, 10));
 		panelSelectedImages.add(scroll, BorderLayout.CENTER);
 		
-		JPanel panelSendImages = new JPanel();
-		painelCentro.add(panelSendImages);
-		panelSendImages.setLayout(new BorderLayout(5, 5));
-		
-		JPanel panelContSend = new JPanel();
-		panelSendImages.add(panelContSend, BorderLayout.NORTH);
-		panelContSend.setLayout(new GridLayout(1, 2, 5, 5));
-		
-		JLabel lblTitleSendImages = new JLabel("Imagens Enviadas");
-		panelContSend.add(lblTitleSendImages);
-		lblTitleSendImages.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		textFieldSended = new JTextField();
-		textFieldSended.setEditable(false);
-		textFieldSended.setHorizontalAlignment(SwingConstants.CENTER);
-		textFieldSended.setColumns(5);		
-		panelContSend.add(textFieldSended);
-		
 		model2 = new DefaultListModel();
-		listEnviados = new JList(model2);
-		scroll2 = new JScrollPane (listEnviados, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scroll2.setBorder(new EmptyBorder(10, 10, 10, 10));
-		panelSendImages.add(scroll2, BorderLayout.CENTER);
 		
-		JPanel panelBaixo = new JPanel();
-		painelCentral.add(panelBaixo, BorderLayout.SOUTH);
-		panelBaixo.setLayout(new GridLayout(0, 1, 10, 10));
+		JPanel painelBaixo = new JPanel();
+		painelCentral.add(painelBaixo, BorderLayout.SOUTH);
+		painelBaixo.setLayout(new GridLayout(0, 1, 10, 10));
 		
 		JPanel panelBarraCronometro = new JPanel();
-		panelBaixo.add(panelBarraCronometro);
+		painelBaixo.add(panelBarraCronometro);
 		panelBarraCronometro.setLayout(new BoxLayout(panelBarraCronometro, BoxLayout.X_AXIS));
 		
 		JLabel labelEspaco = new JLabel("");
@@ -197,9 +188,10 @@ public class JanelaPrincipal extends JFrame {
 		lblCronometro.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JPanel panelAddRemArq = new JPanel();
-		panelBaixo.add(panelAddRemArq);
+		painelBaixo.add(panelAddRemArq);
 		
 		btnEnviarArquivos = new JButton("Enviar Arquivos");
+		btnEnviarArquivos.setEnabled(false);
 		panelAddRemArq.add(btnEnviarArquivos);
 //		btnEnviarArquivos.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent arg0) {
@@ -220,9 +212,11 @@ public class JanelaPrincipal extends JFrame {
 		// TODO Deixar desativado até Enviar para o Servidor
 		// TODO setEnable(false) no SelecionarArquivos depois de enviado
 		btnAdicionarArquivos = new JButton("Adicionar Arquivos");
+		btnAdicionarArquivos.setEnabled(false);
 		panelAddRemArq.add(btnAdicionarArquivos);
 		
 		btnRemoverArquivos = new JButton("Remover Arquivos");
+		btnRemoverArquivos.setEnabled(false);
 		panelAddRemArq.add(btnRemoverArquivos);
 	}
 
@@ -252,14 +246,6 @@ public class JanelaPrincipal extends JFrame {
 		this.scroll = scroll;
 	}
 
-	public JScrollPane getScroll2() {
-		return scroll2;
-	}
-
-	public void setScroll2(JScrollPane scroll2) {
-		this.scroll2 = scroll2;
-	}
-
 	public DefaultListModel getModel() {
 		return model;
 	}
@@ -284,14 +270,6 @@ public class JanelaPrincipal extends JFrame {
 		this.listSelecionadas = listSelecionadas;
 	}
 
-	public JList getListEnviados() {
-		return listEnviados;
-	}
-
-	public void setListEnviados(JList listEnviados) {
-		this.listEnviados = listEnviados;
-	}
-
 	public JTextField getTextFieldSelected() {
 		return textFieldSelected;
 	}
@@ -300,14 +278,6 @@ public class JanelaPrincipal extends JFrame {
 		this.textFieldSelected = textFieldSelected;
 	}
 
-	public JTextField getTextFieldSended() {
-		return textFieldSended;
-	}
-
-	public void setTextFieldSended(JTextField textFieldSended) {
-		this.textFieldSended = textFieldSended;
-	}
-	
 	public JProgressBar getProgressBar() {
 		return progressBar;
 	}
