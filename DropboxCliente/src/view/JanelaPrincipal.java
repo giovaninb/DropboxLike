@@ -222,6 +222,30 @@ public class JanelaPrincipal extends JFrame {
 
 	
 	
+	public JTextField getTxEndereco() {
+		return txEndereco;
+	}
+
+
+
+	public void setTxEndereco(JTextField txEndereco) {
+		this.txEndereco = txEndereco;
+	}
+
+
+
+	public JButton getBtnConectar() {
+		return btnConectar;
+	}
+
+
+
+	public void setBtnConectar(JButton btnConectar) {
+		this.btnConectar = btnConectar;
+	}
+
+
+
 	public JPanel getPainelCentral() {
 		return painelCentral;
 	}

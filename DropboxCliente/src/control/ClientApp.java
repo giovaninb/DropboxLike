@@ -16,8 +16,11 @@ public class ClientApp {
 				public void run() {
 					try {
 						JanelaPrincipal frame = new JanelaPrincipal();
-						ControleJanelaPrincipal controle = new ControleJanelaPrincipal(frame);
 						frame.setVisible(true);
+						ClientSocket client = new ClientSocket(frame);
+						ControleJanelaPrincipal controle = new ControleJanelaPrincipal(frame, client);
+
+
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

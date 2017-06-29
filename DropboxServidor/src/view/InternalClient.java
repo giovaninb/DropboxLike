@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 
 public class InternalClient extends JInternalFrame {
 	private JTextField txtIP;
@@ -26,8 +27,9 @@ public class InternalClient extends JInternalFrame {
 		getContentPane().setLayout(null);
 		
 		JLabel lblCliente = new JLabel("CLIENTE");
+		lblCliente.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCliente.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
-		lblCliente.setBounds(139, 11, 100, 24);
+		lblCliente.setBounds(155, 11, 100, 24);
 		getContentPane().add(lblCliente);
 		
 		txtIP = new JTextField();

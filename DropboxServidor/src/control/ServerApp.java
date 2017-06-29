@@ -13,6 +13,8 @@ public class ServerApp {
 			public void run() {
 				try {
 					JanelaPrincipal frame = new JanelaPrincipal();
+					Server server = new Server();
+					
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

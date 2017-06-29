@@ -24,9 +24,11 @@ public class ControleJanelaPrincipal implements ActionListener, KeyListener {
 	private JanelaPrincipal jan;
 	private BarraProgresso barraProgresso;
 	private Cronometro cronometro;
+	private ClientSocket cliente;
 
-	public ControleJanelaPrincipal(JanelaPrincipal jan) {
+	public ControleJanelaPrincipal(JanelaPrincipal jan, ClientSocket client) {
 		this.jan = jan;
+		this.cliente = client;
 		registraListeners();
 		
 	}
@@ -36,6 +38,7 @@ public class ControleJanelaPrincipal implements ActionListener, KeyListener {
 		this.jan.getBtnEnviarArquivos().addActionListener(this);
 		this.jan.getBtnAdicionarArquivos().addActionListener(this);
 		this.jan.getBtnRemoverArquivos().addActionListener(this);
+		this.jan.getBtnConectar().addActionListener(this);
 	}
 
 	@Override
@@ -58,6 +61,9 @@ public class ControleJanelaPrincipal implements ActionListener, KeyListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if (e.getActionCommand().equalsIgnoreCase("Conectar")) {
+			cliente.estabeleConexao();
+		}
 		if (e.getActionCommand().equalsIgnoreCase("Selecionar Arquivos")) {
 			String imagens[];
 			Path caminho = Paths.get(System.getProperty("user.dir"),"src"+File.separator+"images");
