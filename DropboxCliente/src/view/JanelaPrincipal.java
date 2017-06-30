@@ -191,6 +191,7 @@ public class JanelaPrincipal extends JFrame {
 		painelBaixo.add(panelAddRemArq);
 		
 		btnEnviarArquivos = new JButton("Enviar Arquivos");
+		btnEnviarArquivos.setEnabled(false);
 		panelAddRemArq.add(btnEnviarArquivos);
 //		btnEnviarArquivos.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent arg0) {

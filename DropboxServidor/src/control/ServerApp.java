@@ -17,7 +17,6 @@ public class ServerApp {
 					JanelaPrincipal jp = new JanelaPrincipal();
 					Imagem img = new Imagem();
 					ControleImagens controle = new ControleImagens(img, jp);
-					controle.aguardarClientes();
 					jp.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

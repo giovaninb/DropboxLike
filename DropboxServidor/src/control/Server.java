@@ -138,7 +138,8 @@ public class Server extends Thread {
 
 	@Override
 	public void run() {
-		comparaDados(contadorArquivosCliente, contadorArquivosServidor);
+		estabeleConexoes();
+		aguardaClientes();
 	}
 
 	public DefaultListModel<Imagem> getListaImagens() {

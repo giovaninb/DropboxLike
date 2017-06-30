@@ -1,5 +1,6 @@
 package control;
 
+import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -10,6 +11,7 @@ import java.net.Socket;
 
 import javax.swing.JOptionPane;
 
+import model.Imagem;
 import view.JanelaPrincipal;
 
 public class ClientSocket {
@@ -25,6 +27,8 @@ public class ClientSocket {
     
     ObjectInputStream objectInputStream;
     ObjectOutputStream objectOutputStream;
+    
+    Imagem imagem;
     
     
     
@@ -47,19 +51,26 @@ public class ClientSocket {
     	try {
 			socket = new Socket("localhost", 12345);
 			conectou.showMessageDialog(jan, "Cliente conectou com sucesso!", "Conexão Cliente", JOptionPane.INFORMATION_MESSAGE);
+	    	jan.getBtnEnviarArquivos().setEnabled(true);
     	} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			conectou.showMessageDialog(jan, "Cliente falhou ao se conectar.", "Conexão Cliente", JOptionPane.ERROR_MESSAGE);
-		}
-    	jan.getBtnEnviarArquivos().setEnabled(true);
-    	    	
+		}    	    	
     }
     
 
-	public String getMensagem() {
-		// TODO Auto-generated method stub
-		return null;
+	private byte[] serializarArquivo(){
+        try {
+                 ByteArrayOutputStream bao = new ByteArrayOutputStream();
+                 objectOutputStream = new ObjectOutputStream(bao);
+                 objectOutputStream.writeObject(imagem);
+                 return bao.toByteArray();
+        } catch (IOException e) {
+                 e.printStackTrace();
+        }
+
+        return null;
 	}
     
     

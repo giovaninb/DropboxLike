@@ -17,9 +17,10 @@ public class ControleImagens extends Thread {
 		this.imagem = img;
 		this.jan = jan;
 		
-		servidor = new Server();
-		servidor.estabeleConexoes();
-		servidor.aguardaClientes();
+		//cria uma thread que envia a conexao
+		Thread t = new Server();
+		//inicia a thread t
+		t.start();
 	}
 	
 	public void aguardarClientes() {
@@ -45,6 +46,11 @@ public class ControleImagens extends Thread {
 	public String retornaMensagem() {
 		return servidor.sendMensagem();
 		
+	}
+	
+	@Override
+	public void run() {
+		aguardarClientes();
 	}
 	
 

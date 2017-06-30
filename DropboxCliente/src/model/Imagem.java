@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Imagem implements Serializable {
 
-	private String nome;
+	private String[] nome;
 	private int identificador;
 
 	private byte[] conteudo;
@@ -14,7 +14,7 @@ public class Imagem implements Serializable {
 	private String portaDestino;
 	private String diretorioDestino;
 
-	public Imagem(int id, String nome) {
+	public Imagem(int id, String[] nome) {
 		this.identificador = id;
 		this.nome = nome;
 	}
@@ -23,11 +23,11 @@ public class Imagem implements Serializable {
 
 	}
 
-	public String getNome() {
+	public String[] getNome() {
 		return nome;
 	}
 
-	public void setNome(String nome) {
+	public void setNome(String[] nome) {
 		this.nome = nome;
 	}
 

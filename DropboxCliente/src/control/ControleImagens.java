@@ -20,10 +20,5 @@ public class ControleImagens {
 	public void mostrarDadosEnviados() {
 		
 	}
-	
-	public String retornaMensagem() {
-		return cliente.getMensagem();
-		
-	}
 
 }
