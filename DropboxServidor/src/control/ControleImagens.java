@@ -11,6 +11,7 @@ public class ControleImagens extends Thread {
 	private JanelaPrincipal jan;
 	private InternalClient internal;
 	private int cont = 0;
+	private int quantidade = 32;
 
 	
 	public ControleImagens(Imagem img, JanelaPrincipal jan) {
@@ -48,6 +49,8 @@ public class ControleImagens extends Thread {
 	@Override
 	public void run() {
 		aguardarClientes();
+		servidor.comparaDados(quantidade, Integer.parseInt(internal.getTxtQuantidade().toString()));
+		
 	}
 	
 

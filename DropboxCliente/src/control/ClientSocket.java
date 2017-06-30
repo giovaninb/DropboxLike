@@ -52,6 +52,9 @@ public class ClientSocket {
 			socket = new Socket("localhost", 12345);
 			conectou.showMessageDialog(jan, "Cliente conectou com sucesso!", "Conexão Cliente", JOptionPane.INFORMATION_MESSAGE);
 	    	jan.getBtnEnviarArquivos().setEnabled(true);
+	    	
+            output.writeUTF(jan.getTextFieldSelected().toString());
+            
     	} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -60,7 +63,7 @@ public class ClientSocket {
     }
     
 
-	private byte[] serializarArquivo(){
+	public byte[] serializarArquivo(){
         try {
                  ByteArrayOutputStream bao = new ByteArrayOutputStream();
                  objectOutputStream = new ObjectOutputStream(bao);
@@ -69,7 +72,6 @@ public class ClientSocket {
         } catch (IOException e) {
                  e.printStackTrace();
         }
-
         return null;
 	}
     

@@ -31,7 +31,6 @@ public class ControleJanelaPrincipal implements ActionListener, KeyListener {
 		this.jan = jan;
 		this.cliente = client;
 		registraListeners();
-		
 	}
 
 	private void registraListeners() {
@@ -70,10 +69,10 @@ public class ControleJanelaPrincipal implements ActionListener, KeyListener {
 			Path caminho = Paths.get(System.getProperty("user.dir"),"src"+File.separator+"images");
 	        String path = caminho.toString();
 			JFileChooser chooser = new JFileChooser(path);  //Cria uma instância do JFileChooser
-			// TODO Referência: http://javafree.uol.com.br/artigo/877686/Visualizador-de-Imagens-com-JavaSwing+exemplo-JFileChooser.html
+			
 			chooser.setMultiSelectionEnabled(true); //Seleciona múltiplos arquivos: true
 		    FileNameExtensionFilter filter = new FileNameExtensionFilter(
-		    		"PNG & JPEG Images", "png", "jpeg");  //Cria um filtro
+		    		"BMP & JPG Images", "bmp", "jpg");  //Cria um filtro
 		    chooser.setFileFilter(filter);  //Altera o filtro do JFileChooser
 		    int returnVal = chooser.showOpenDialog(jan); //Abre o diálogo JFileChooser
 		    if(returnVal == JFileChooser.APPROVE_OPTION) {  //Verifica se o usuário clicou no botão OK
@@ -87,7 +86,7 @@ public class ControleJanelaPrincipal implements ActionListener, KeyListener {
 		           System.out.println("Imagem: "+imagem.getNome().toString());
 		           // Método para setar texto no JTextArea
 		           //listSelecionadas.append((i+1)+") "+imagens[i]+"\n");
-		           // TODO Referência: http://www.java2s.com/Code/Java/Swing-JFC/AnexampleofJListwithaDefaultListModel.htm
+		          
 		           jan.getModel().addElement((i+1)+") "+imagens[i]+"\n");
 		           // Para pegar o caminho absoluto
 		           // absoluto[i] = selFile[i].getAbsolutePath();
@@ -101,8 +100,7 @@ public class ControleJanelaPrincipal implements ActionListener, KeyListener {
 			cronometro.start();
 			barraProgresso = new BarraProgresso(jan.getProgressBar(), jan.getBtnEnviarArquivos(), cronometro);
 			barraProgresso.start();
-			// consumir elementos da lista 1, e produzir elementos na lista 2
-			
+			cliente.serializarArquivo();
 			// setar texto nos campos de contagem
 	        jan.getTextFieldSelected().setText(String.valueOf(jan.getModel().getSize())); 
 			
@@ -112,7 +110,6 @@ public class ControleJanelaPrincipal implements ActionListener, KeyListener {
 			Path caminho = Paths.get(System.getProperty("user.dir"),"src"+File.separator+"images");
 	        String path = caminho.toString();
 			JFileChooser chooser = new JFileChooser(path);  //Cria uma instância do JFileChooser
-			// TODO Referência: http://javafree.uol.com.br/artigo/877686/Visualizador-de-Imagens-com-JavaSwing+exemplo-JFileChooser.html
 			chooser.setMultiSelectionEnabled(true); //Seleciona múltiplos arquivos: true
 		    FileNameExtensionFilter filter = new FileNameExtensionFilter(
 		        "PNG & JPEG Images", "png", "jpeg");  //Cria um filtro
@@ -126,7 +123,6 @@ public class ControleJanelaPrincipal implements ActionListener, KeyListener {
 		           imagens[i] = selFile[i].getName();
 		           // Método para setar texto no JTextArea
 		           //listSelecionadas.append((i+1)+") "+imagens[i]+"\n");
-		           // TODO Referência: http://www.java2s.com/Code/Java/Swing-JFC/AnexampleofJListwithaDefaultListModel.htm
 		           jan.getModel2().insertElementAt((jan.getModel2().getSize()+1)+") "+imagens[i]+"\n", jan.getModel2().getSize());
 		           // Para pegar o caminho absoluto
 		           // absoluto[i] = selFile[i].getAbsolutePath();

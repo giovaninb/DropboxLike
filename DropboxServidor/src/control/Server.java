@@ -76,7 +76,7 @@ public class Server extends Thread {
 			System.out.println("Lista recebida com sucesso!");
 			// Número de arquivos Cliente
 			dataInputStream = new DataInputStream(socket.getInputStream());
-
+			contadorArquivosCliente = Integer.parseInt(dataInputStream.readUTF());
 			listaImagens = new DefaultListModel<>();
 			for (int i = 0; i < listaImagens.size(); i++) {
 				String s;

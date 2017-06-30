@@ -193,22 +193,6 @@ public class JanelaPrincipal extends JFrame {
 		btnEnviarArquivos = new JButton("Enviar Arquivos");
 		btnEnviarArquivos.setEnabled(false);
 		panelAddRemArq.add(btnEnviarArquivos);
-//		btnEnviarArquivos.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent arg0) {
-//				cronometro = new Cronometro(lblCronometro);
-//				cronometro.start();
-//				barraProgresso = new BarraProgresso(progressBar, btnEnviarArquivos, cronometro);
-//				barraProgresso.start();
-//				// consumir elementos da lista 1, e produzir elementos na lista 2
-//				
-//				// setar texto nos campos de contagem
-//		        textFieldSelected.setText(String.valueOf(model.getSize())); 
-//		        
-//
-//			
-//			}
-//		});
-		
 		// TODO Deixar desativado até Enviar para o Servidor
 		// TODO setEnable(false) no SelecionarArquivos depois de enviado
 		btnAdicionarArquivos = new JButton("Adicionar Arquivos");
