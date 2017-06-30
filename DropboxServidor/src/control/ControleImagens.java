@@ -22,13 +22,17 @@ public class ControleImagens extends Thread {
 		Thread t = new Server();
 		//inicia a thread t
 		t.start();
+		while (true) {
+			aguardarClientes();
+		}
 	}
 	
 	public void aguardarClientes() {
 		internal = new InternalClient();
 		internal.setVisible(true);
-		internal.getTxtIP().setText(servidor.getIpCliente());
+		//internal.getTxtIP().setText(servidor.getIpCliente().toString());
 		jan.getContentPane().add(internal);
+		jan.validate();
 		
 		
 	}
@@ -48,9 +52,8 @@ public class ControleImagens extends Thread {
 	
 	@Override
 	public void run() {
-		aguardarClientes();
-		servidor.comparaDados(quantidade, Integer.parseInt(internal.getTxtQuantidade().toString()));
-		
+		Thread t = servidor.comparaDados(quantidade, Integer.parseInt(internal.getTxtQuantidade().toString()));
+		t.start();		
 	}
 	
 

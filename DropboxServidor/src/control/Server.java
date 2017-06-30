@@ -8,11 +8,13 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.Array;
+import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 import model.Imagem;
 import view.InternalClient;
@@ -25,7 +27,7 @@ public class Server extends Thread {
 
 	private DefaultListModel<Imagem> listaImagens;
 	private String ipCliente;
-
+	private JanelaPrincipal jan;
 	private int conectou = 0;
 
 	// Declaro o ServerSocket
@@ -41,7 +43,7 @@ public class Server extends Thread {
 	ObjectInputStream objectInputStream;
 	ObjectOutputStream objectOutputStream;
 
-	public void estabeleConexoes() {
+	public void estabeleConexoes() throws BindException {
 		try {
 			servSocket = new ServerSocket(12345);
 			System.out.println("Porta 12345 aberta!");
@@ -53,7 +55,6 @@ public class Server extends Thread {
 
 	public int aguardaClientes() {
 		try {
-
 			socket = servSocket.accept();
 			this.conectou++;
 			// Se conectou subir um JOptionPane informando pedido de conexão
@@ -102,8 +103,9 @@ public class Server extends Thread {
 		return null;
 	}
 
-	public int comparaDados(int num1, int num2) {
+	public Thread comparaDados(int num1, int num2) {
 		int diferenca = 0;
+		JOptionPane modificados = new JOptionPane();
 		try {
 			dataInputStream = new DataInputStream(socket.getInputStream());
 			dataOutputStream = new DataOutputStream(socket.getOutputStream());
@@ -113,33 +115,37 @@ public class Server extends Thread {
 
 			contadorArquivosCliente = Integer.parseInt(dataInputStream.readUTF());
 
+			diferenca = contadorArquivosServidor - contadorArquivosCliente;
 			// se o numero entre cliente e servidor for maior no Cliente,
 			// significa que precisamos emitir uma mensagem de adição no
 			// Servidor
 			if (contadorArquivosCliente > contadorArquivosServidor) {
-
+				 modificados.showMessageDialog(jan, "Cliente removeu "+diferenca+" com sucesso!", "Arquivos Modificados", JOptionPane.INFORMATION_MESSAGE);
 			} // se o numero for maior no servidor, significa que o Cliente
 				// removeu arquivos, e precisamos mandar uma msg pro Servidor e
 				// atualizar a lista
-			else if (contadorArquivosCliente < contadorArquivosServidor) {
-
+			else if(contadorArquivosCliente < contadorArquivosServidor) {
+				 modificados.showMessageDialog(jan, "Cliente adicionou "+diferenca+" com sucesso!", "Arquivos Modificados", JOptionPane.INFORMATION_MESSAGE);
 			} // se o numero ficar inalterado, tudo ok
-			else {
-
-			}
-
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return diferenca;
+		return null;
 
 	}
 
 	@Override
 	public void run() {
-		estabeleConexoes();
+		try {
+			estabeleConexoes();
+		} catch (BindException e) {
+			JOptionPane ocupado = new JOptionPane();
+			ocupado.showMessageDialog(jan, "Endereço já está em uso!", "Endereço Ocupado", JOptionPane.ERROR_MESSAGE);
+		}
 		aguardaClientes();
+		
+		Thread t = comparaDados(contadorArquivosCliente, contadorArquivosServidor);
 	}
 
 	public DefaultListModel<Imagem> getListaImagens() {

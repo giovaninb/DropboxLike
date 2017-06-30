@@ -6,6 +6,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.ConnectException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -44,8 +45,7 @@ public class ClientSocket {
     	// TODO pegar a referencia do txField
 //    	socket = new Socket(jan.getTxEndereco().toString(), 12345);
 //    	while (jan.getTxEndereco().toString().isEmpty()) {
-//    		Thread.holdsLock(socket);
-//    		
+//    		Thread.holdsLock(socket);	
 //		}
     	
     	try {
@@ -53,11 +53,11 @@ public class ClientSocket {
 			conectou.showMessageDialog(jan, "Cliente conectou com sucesso!", "Conexão Cliente", JOptionPane.INFORMATION_MESSAGE);
 	    	jan.getBtnEnviarArquivos().setEnabled(true);
 	    	
-            output.writeUTF(jan.getTextFieldSelected().toString());
             
-    	} catch (IOException e) {
+    	} catch(ConnectException e) {
+			conectou.showMessageDialog(jan, "Cliente falhou ao se conectar.", "Conexão Cliente", JOptionPane.ERROR_MESSAGE);
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 			conectou.showMessageDialog(jan, "Cliente falhou ao se conectar.", "Conexão Cliente", JOptionPane.ERROR_MESSAGE);
 		}    	    	
     }

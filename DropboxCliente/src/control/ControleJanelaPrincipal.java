@@ -129,6 +129,8 @@ public class ControleJanelaPrincipal implements ActionListener, KeyListener {
 		           System.out.println("Você selecionou este arquivo: " +imagens[i]); // Apresenta uma mensagem informando o nome dos arquivos selecionados
 		        }
 		        jan.getTextFieldSelected().setText(String.valueOf(jan.getModel2().getSize()));
+		        jan.getBtnAdicionarArquivos().setEnabled(true);
+		        jan.getBtnRemoverArquivos().setEnabled(true);
 		    }
 		}
 		if (e.getActionCommand().equalsIgnoreCase("Remover Arquivos")) {
