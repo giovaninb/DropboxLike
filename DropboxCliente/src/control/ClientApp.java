@@ -20,7 +20,6 @@ public class ClientApp {
 						ClientSocket client = new ClientSocket(frame);
 						ControleJanelaPrincipal controle = new ControleJanelaPrincipal(frame, client);
 
-
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

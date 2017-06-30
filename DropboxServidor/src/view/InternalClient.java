@@ -18,6 +18,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import javax.swing.BoxLayout;
 
 public class InternalClient extends JInternalFrame {
 	private JTextField txtIP;
@@ -32,24 +33,24 @@ public class InternalClient extends JInternalFrame {
 	public InternalClient() {
 		setResizable(true);
 		setClosable(true);
-		getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		getContentPane().setLayout(new GridLayout(2, 1, 5, 5));
 		
 		
 		JPanel painelCentral = new JPanel();
 		painelCentral.setBorder(new EmptyBorder(5, 5, 5, 5));
-		painelCentral.setLayout(new BorderLayout(0, 0));
 		getContentPane().add(painelCentral);
+		painelCentral.setLayout(new GridLayout(2, 1, 5, 5));
+		
+				
+				JLabel lblCliente = new JLabel("CLIENTE");
+				painelCentral.add(lblCliente);
+				lblCliente.setHorizontalAlignment(SwingConstants.CENTER);
+				lblCliente.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
 		
 		JPanel painelTopo = new JPanel();
 		painelTopo.setBorder(new EmptyBorder(10, 10, 10, 10));
-		painelCentral.add(painelTopo, BorderLayout.NORTH);
-		painelTopo.setLayout(new GridLayout(1, 1, 5, 5));
-
-		
-		JLabel lblCliente = new JLabel("CLIENTE");
-		painelTopo.add(lblCliente);
-		lblCliente.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCliente.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
+		painelCentral.add(painelTopo);
+		painelTopo.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 25));
 		
 		JLabel lblIp = new JLabel("IP:");
 		lblIp.setHorizontalAlignment(SwingConstants.CENTER);
@@ -69,12 +70,12 @@ public class InternalClient extends JInternalFrame {
 		txtQuantidade.setEditable(false);
 		txtQuantidade.setColumns(10);
 		
-		JPanel painelCentro = new JPanel();
-		painelCentro.setBorder(new EmptyBorder(10, 10, 10, 10));
-		painelCentral.add(painelCentro, BorderLayout.CENTER);
-		painelCentro.setLayout(new GridLayout(1, 2, 5, 5));
-		
 		modelo = new DefaultListModel();
+		
+		JPanel painelCentro = new JPanel();
+		getContentPane().add(painelCentro);
+		painelCentro.setBorder(new EmptyBorder(10, 10, 10, 10));
+		painelCentro.setLayout(new GridLayout(0, 1, 0, 0));
 		listaCliente = new JList();
 		scroll = new JScrollPane(listaCliente, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		painelCentro.add(scroll);

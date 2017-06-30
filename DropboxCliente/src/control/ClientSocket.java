@@ -38,7 +38,7 @@ public class ClientSocket {
     	JOptionPane conectou = new JOptionPane();
     	
     	// TODO pegar a referencia do txField
-    	//socket = new Socket(jan.getTxEndereco().toString(), 12345);
+//    	socket = new Socket(jan.getTxEndereco().toString(), 12345);
 //    	while (jan.getTxEndereco().toString().isEmpty()) {
 //    		Thread.holdsLock(socket);
 //    		

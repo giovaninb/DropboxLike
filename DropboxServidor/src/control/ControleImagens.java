@@ -16,20 +16,21 @@ public class ControleImagens extends Thread {
 	public ControleImagens(Imagem img, JanelaPrincipal jan) {
 		this.imagem = img;
 		this.jan = jan;
+		
 		servidor = new Server();
+		servidor.estabeleConexoes();
+		servidor.aguardaClientes();
 	}
 	
 	public void aguardarClientes() {
-		
-		if (servidor.aguardaClientes()) {
-			internal = new InternalClient();
-			jan.getContentPane().add(internal);
-			internal.getTxtIP().setText(servidor.getIpCliente());
-			internal.setBounds(cont, cont, 450, 800);
-			internal.setVisible(true);
-			cont = cont+50;
-			jan.revalidate();
-		}
+		internal = new InternalClient();
+		jan.getContentPane().add(internal);
+		internal.getTxtIP().setText(servidor.getIpCliente());
+		internal.setBounds(cont, cont, 450, 800);
+		internal.setVisible(true);
+		cont = cont+50;
+		internal.revalidate();
+		jan.revalidate();
 		
 	}
 	
