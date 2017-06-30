@@ -22,12 +22,10 @@ public class Server extends Thread {
 
 	private int contadorArquivosCliente;
 	private int contadorArquivosServidor;
-	private InternalClient internal;
-	private JanelaPrincipal jan;
-	private DefaultListModel<Imagem> listaImagens;
-	private int cont = 0;
 	
-	private ArrayList<PrintStream> clientes;
+	private DefaultListModel<Imagem> listaImagens;
+	private String ipCliente;
+	
 	
 	//Declaro o ServerSocket
     ServerSocket servSocket = null; 
@@ -62,16 +60,9 @@ public class Server extends Thread {
 				// Se conectou subir um JOptionPane informando pedido de conexão
 				// Ok pressionado, abre JInternalFrame na área do JFrame
 				System.out.print("Aguardando conexao do cliente...");
-				System.out.println("Nova conexao com o cliente " + socket.getInetAddress().getHostAddress());
+				ipCliente = socket.getInetAddress().getHostAddress();
+				System.out.println("Nova conexao com o cliente " + ipCliente);
 				
-				internal = new InternalClient();
-				internal.setVisible(true);
-				internal.setBounds(cont, cont, 400, 400);
-				cont = cont+50;
-				jan.getContentPane().add(internal);
-				jan.validate();
-				
-			       
 				return conectou;
 			} catch (IOException e) {
 				System.out.println(e.getMessage()+" \n Algum problema ocorreu para criar ou receber o socket.");
@@ -156,6 +147,14 @@ public class Server extends Thread {
 
 	public void setListaImagens(DefaultListModel<Imagem> listaImagens) {
 		this.listaImagens = listaImagens;
+	}
+
+	public String getIpCliente() {
+		return ipCliente;
+	}
+
+	public void setIpCliente(String ipCliente) {
+		this.ipCliente = ipCliente;
 	}
 	
 	

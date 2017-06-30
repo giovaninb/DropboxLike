@@ -30,6 +30,8 @@ public class InternalClient extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public InternalClient() {
+		setResizable(true);
+		setClosable(true);
 		getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		
@@ -78,4 +80,22 @@ public class InternalClient extends JInternalFrame {
 		painelCentro.add(scroll);
 
 	}
+
+	public JTextField getTxtIP() {
+		return txtIP;
+	}
+
+	public void setTxtIP(JTextField txtIP) {
+		this.txtIP = txtIP;
+	}
+
+	public JTextField getTxtQuantidade() {
+		return txtQuantidade;
+	}
+
+	public void setTxtQuantidade(JTextField txtQuantidade) {
+		this.txtQuantidade = txtQuantidade;
+	}
+	
+	
 }

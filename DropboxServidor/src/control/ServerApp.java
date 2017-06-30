@@ -14,12 +14,11 @@ public class ServerApp {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					JanelaPrincipal frame = new JanelaPrincipal();
+					JanelaPrincipal jp = new JanelaPrincipal();
 					Imagem img = new Imagem();
-					ControleImagens controle = new ControleImagens(img, frame);
+					ControleImagens controle = new ControleImagens(img, jp);
 					controle.aguardarClientes();
-					
-					frame.setVisible(true);
+					jp.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

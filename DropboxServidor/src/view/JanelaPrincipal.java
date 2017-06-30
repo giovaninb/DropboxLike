@@ -27,6 +27,12 @@ public class JanelaPrincipal extends JFrame {
 
 	private JDesktopPane contentPane;
 	private int cont = 0;
+	
+	/*public static void main(String[] args) {
+		JanelaPrincipal jp = new JanelaPrincipal();
+		jp.setVisible(true);
+	}*/
+	
 	/**
 	 * Create the frame.
 	 */
