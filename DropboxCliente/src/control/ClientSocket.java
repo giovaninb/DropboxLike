@@ -33,7 +33,7 @@ public class ClientSocket {
     
     
     public ClientSocket(JanelaPrincipal jan) {
-		super();
+		
 		this.jan = jan;
 	}
 

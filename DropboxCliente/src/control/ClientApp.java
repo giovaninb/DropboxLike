@@ -3,6 +3,7 @@ package control;
 import java.awt.EventQueue;
 
 import model.Cronometro;
+import model.Imagem;
 import view.JanelaPrincipal;
 
 public class ClientApp {
@@ -17,8 +18,10 @@ public class ClientApp {
 					try {
 						JanelaPrincipal frame = new JanelaPrincipal();
 						frame.setVisible(true);
-						ClientSocket client = new ClientSocket(frame);
-						ControleJanelaPrincipal controle = new ControleJanelaPrincipal(frame, client);
+						Imagem img = new Imagem();
+						ClientSocket cliente = new ClientSocket(frame);
+						ControleImagens controleSocket = new ControleImagens(img, cliente);
+						ControleJanelaPrincipal controleGUI = new ControleJanelaPrincipal(frame, cliente);
 
 					} catch (Exception e) {
 						e.printStackTrace();

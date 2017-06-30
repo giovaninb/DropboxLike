@@ -24,6 +24,7 @@ public class ControleJanelaPrincipal implements ActionListener, KeyListener {
 	private JanelaPrincipal jan;
 	private BarraProgresso barraProgresso;
 	private Cronometro cronometro;
+	private Imagem imagem;
 	private ClientSocket cliente;
 
 	public ControleJanelaPrincipal(JanelaPrincipal jan, ClientSocket client) {
@@ -81,13 +82,16 @@ public class ControleJanelaPrincipal implements ActionListener, KeyListener {
 		    	
 		        for (int i = 0; i < selFile.length; i++) {  
 		           imagens[i] = selFile[i].getName();
+		           imagem = new Imagem();
+		           imagem.setNome(imagens[i]);
+		           System.out.println("Imagem: "+imagem.getNome().toString());
 		           // Método para setar texto no JTextArea
 		           //listSelecionadas.append((i+1)+") "+imagens[i]+"\n");
 		           // TODO Referência: http://www.java2s.com/Code/Java/Swing-JFC/AnexampleofJListwithaDefaultListModel.htm
 		           jan.getModel().addElement((i+1)+") "+imagens[i]+"\n");
 		           // Para pegar o caminho absoluto
 		           // absoluto[i] = selFile[i].getAbsolutePath();
-		           System.out.println("Você selecionou este arquivo: " +imagens[i]); // Apresenta uma mensagem informando o nome dos arquivos selecionados
+		           //System.out.println("Você selecionou este arquivo: " +imagens[i]); // Apresenta uma mensagem informando o nome dos arquivos selecionados
 		        }  
 		        jan.getTextFieldSelected().setText(String.valueOf(selFile.length)); 
 			}

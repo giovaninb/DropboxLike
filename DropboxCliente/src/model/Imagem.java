@@ -5,30 +5,24 @@ import java.util.Date;
 
 public class Imagem implements Serializable {
 
-	private String[] nome;
+	private String nome;
 	private int identificador;
-
 	private byte[] conteudo;
 	private long tamanhoKB;
 	private String ipDestino;
 	private String portaDestino;
 	private String diretorioDestino;
 
-	public Imagem(int id, String[] nome) {
-		this.identificador = id;
-		this.nome = nome;
-	}
-
 	public Imagem() {
 
 	}
 
-	public String[] getNome() {
+	public String getNome() {
 		return nome;
 	}
 
-	public void setNome(String[] nome) {
-		this.nome = nome;
+	public void setNome(String string) {
+		this.nome = string;
 	}
 
 	public byte[] getConteudo() {

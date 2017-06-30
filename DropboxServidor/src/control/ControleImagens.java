@@ -25,13 +25,10 @@ public class ControleImagens extends Thread {
 	
 	public void aguardarClientes() {
 		internal = new InternalClient();
-		jan.getContentPane().add(internal);
-		internal.getTxtIP().setText(servidor.getIpCliente());
-		internal.setBounds(cont, cont, 450, 800);
 		internal.setVisible(true);
-		cont = cont+50;
-		internal.revalidate();
-		jan.revalidate();
+		internal.getTxtIP().setText(servidor.getIpCliente());
+		jan.getContentPane().add(internal);
+		
 		
 	}
 	

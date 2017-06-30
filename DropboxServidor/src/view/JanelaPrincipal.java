@@ -22,6 +22,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
+import javax.swing.BoxLayout;
 
 public class JanelaPrincipal extends JFrame {
 
@@ -49,7 +50,7 @@ public class JanelaPrincipal extends JFrame {
 		
 		String nomeAplicacao = "Server App";
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(900, 100, 945, 600);
+		setBounds(600, 100, 1200, 740);
 		setTitle(nomeAplicacao);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -65,16 +66,14 @@ public class JanelaPrincipal extends JFrame {
 				// COLOCAR A INTERNAL FRAME AQUI
 				//VOU DEIXAR COMENTADO QUALQUER COISA
 				
-				/*JPanel painelPrincipal = new JPanel();
+				JPanel painelPrincipal = new JPanel();
 				InternalClient ic = new InternalClient();
 				ic.setVisible(true);
-				ic.setBounds(cont, cont, 400, 400);
-				cont = cont+50;
 				contentPane.add(ic);
 				ic.getContentPane().add(painelPrincipal);
 			
 				painelPrincipal.setVisible(true);
-				validate();*/
+				validate();
 			}
 		});
 		mnMenu.add(mntmConecta);

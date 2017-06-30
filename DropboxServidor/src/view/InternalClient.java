@@ -33,52 +33,54 @@ public class InternalClient extends JInternalFrame {
 	public InternalClient() {
 		setResizable(true);
 		setClosable(true);
-		getContentPane().setLayout(new GridLayout(2, 1, 5, 5));
-		
-		
-		JPanel painelCentral = new JPanel();
-		painelCentral.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(painelCentral);
-		painelCentral.setLayout(new GridLayout(2, 1, 5, 5));
-		
+		getContentPane().setLayout(new BorderLayout(5, 5));
 				
-				JLabel lblCliente = new JLabel("CLIENTE");
-				painelCentral.add(lblCliente);
-				lblCliente.setHorizontalAlignment(SwingConstants.CENTER);
-				lblCliente.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
-		
 		JPanel painelTopo = new JPanel();
+		getContentPane().add(painelTopo, BorderLayout.NORTH);
 		painelTopo.setBorder(new EmptyBorder(10, 10, 10, 10));
-		painelCentral.add(painelTopo);
 		painelTopo.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 25));
+					
+			JLabel lblCliente = new JLabel("CLIENTE");
+			painelTopo.add(lblCliente);
+			lblCliente.setHorizontalAlignment(SwingConstants.CENTER);
+			lblCliente.setFont(new Font("Trebuchet MS", Font.PLAIN, 20));
 		
-		JLabel lblIp = new JLabel("IP:");
-		lblIp.setHorizontalAlignment(SwingConstants.CENTER);
-		painelTopo.add(lblIp);
+		JPanel painelCentro = new JPanel();
+		getContentPane().add(painelCentro, BorderLayout.CENTER);
+		painelCentro.setBorder(new EmptyBorder(10, 10, 10, 10));
+		painelCentro.setLayout(new GridLayout(0, 1, 0, 0));
+		modelo = new DefaultListModel();
+		listaCliente = new JList(modelo);
+		scroll = new JScrollPane(listaCliente, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		painelCentro.add(scroll, BorderLayout.CENTER);
 		
-		txtIP = new JTextField();
-		painelTopo.add(txtIP);
-		txtIP.setEditable(false);
-		txtIP.setColumns(10);
+		JPanel panel = new JPanel();
+		getContentPane().add(panel, BorderLayout.SOUTH);
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		JPanel panel_1 = new JPanel();
+		panel.add(panel_1);
 		
 		JLabel lblQuantidade = new JLabel("Quantidade:");
+		panel_1.add(lblQuantidade);
 		lblQuantidade.setHorizontalAlignment(SwingConstants.CENTER);
-		painelTopo.add(lblQuantidade);
 		
 		txtQuantidade = new JTextField();
-		painelTopo.add(txtQuantidade);
+		panel_1.add(txtQuantidade);
 		txtQuantidade.setEditable(false);
 		txtQuantidade.setColumns(10);
 		
-		modelo = new DefaultListModel();
+		JPanel panel_2 = new JPanel();
+		panel.add(panel_2);
 		
-		JPanel painelCentro = new JPanel();
-		getContentPane().add(painelCentro);
-		painelCentro.setBorder(new EmptyBorder(10, 10, 10, 10));
-		painelCentro.setLayout(new GridLayout(0, 1, 0, 0));
-		listaCliente = new JList();
-		scroll = new JScrollPane(listaCliente, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		painelCentro.add(scroll);
+		JLabel lblIp = new JLabel("IP:");
+		panel_2.add(lblIp);
+		lblIp.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		txtIP = new JTextField();
+		panel_2.add(txtIP);
+		txtIP.setEditable(false);
+		txtIP.setColumns(10);		
 
 	}
 
@@ -97,6 +99,24 @@ public class InternalClient extends JInternalFrame {
 	public void setTxtQuantidade(JTextField txtQuantidade) {
 		this.txtQuantidade = txtQuantidade;
 	}
+
+	public DefaultListModel getModelo() {
+		return modelo;
+	}
+
+	public void setModelo(DefaultListModel modelo) {
+		this.modelo = modelo;
+	}
+
+	public JList getListaCliente() {
+		return listaCliente;
+	}
+
+	public void setListaCliente(JList listaCliente) {
+		this.listaCliente = listaCliente;
+	}
+	
+	
 	
 	
 }
